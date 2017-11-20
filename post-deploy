@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+source "$PLUGIN_AVAILABLE_PATH/config/functions"
+
+main() {
+  declare APP="$1"
+
+  if [[ -f "$DOKKU_ROOT/$APP/SENTRY_URL" || -f "$DOKKU_ROOT/SENTRY_URL" ]]; then
+    echo "-----> Notifying Sentry..."
+    URL=$(dokku url $APP)
+    HOOK_VERSION=$(config_get "$APP" SENTRY_WEBHOOK_VERSION || true)
+    SENTRY_URL=$(cat "$DOKKU_ROOT/$APP/SENTRY_URL" 2> /dev/null || cat "$DOKKU_ROOT/SENTRY_URL" 2> /dev/null)
+    SENTRY_JSON="{ \
+      \"url\": \"$URL\", \
+      \"version\": \"$HOOK_VERSION\" \
+    }"
+    SENTRY_RESULT=$(curl -X POST -H "Content-Type: application/json" -d "$SENTRY_JSON" "${SENTRY_URL}")
+    echo "       ${SENTRY_RESULT}"
+  fi
+}
+
+main "$@"
