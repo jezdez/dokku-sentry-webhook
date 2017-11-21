@@ -14,7 +14,7 @@ main() {
       \"url\": \"$URL\", \
       \"version\": \"$HOOK_VERSION\" \
     }"
-    SENTRY_RESULT=$(curl -X POST -H "Content-Type: application/json" -d "$SENTRY_JSON" "${SENTRY_URL}")
+    SENTRY_RESULT=$(curl -s -S -X POST -H "Content-Type: application/json" -d "$SENTRY_JSON" "${SENTRY_URL}")
     echo "       ${SENTRY_RESULT}"
   fi
 }
