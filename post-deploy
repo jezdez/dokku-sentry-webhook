@@ -8,7 +8,7 @@ main() {
   if [[ -f "$DOKKU_ROOT/$APP/SENTRY_URL" || -f "$DOKKU_ROOT/SENTRY_URL" ]]; then
     echo "-----> Notifying Sentry..."
     URL=$(dokku url $APP)
-    HOOK_VERSION=$(config_get "$APP" SENTRY_WEBHOOK_VERSION || true)
+    HOOK_VERSION=$(config_get "$APP" GIT_REV || true)
     SENTRY_URL=$(cat "$DOKKU_ROOT/$APP/SENTRY_URL" 2> /dev/null || cat "$DOKKU_ROOT/SENTRY_URL" 2> /dev/null)
     SENTRY_JSON="{ \
       \"url\": \"$URL\", \

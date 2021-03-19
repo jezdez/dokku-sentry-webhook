@@ -7,10 +7,10 @@ Dokku Sentry Webhook is a plugin for [Dokku](https://github.com/dokku/dokku) tha
 
 ```sh
 # dokku 0.3.26
-$ git clone https://github.com/jezdez/dokku-sentry-webhook /var/lib/dokku/plugins/sentry-webhook
+$ git clone https://github.com/yalabot/dokku-sentry-webhook /var/lib/dokku/plugins/sentry-webhook
 
 # dokku 0.4+
-$ dokku plugin:install https://github.com/jezdez/dokku-sentry-webhook.git
+$ dokku plugin:install https://github.com/yalabot/dokku-sentry-webhook.git
 ```
 
 ## Commands
